@@ -51,7 +51,7 @@ block content
                                     if view.upload.fileType == 'video' && view.upload.thumbnailUrl
                                         img.preview-image(src=view.upload.thumbnailUrl)
                                     else if view.upload.fileType == 'video' && !view.upload.thumbnailUrl
-                                        img.preview-image(src="/no_img.png")
+                                        img.preview-image(src="/images/no_img.png")
                                     else if view.upload.fileType == 'image'
                                         img.preview-image(src=view.upload.uploadUrl)
                                     else if view.upload.fileType == 'audio'

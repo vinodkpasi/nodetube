@@ -11,6 +11,9 @@ const Notification = require('../../models/index').Notification;
 const SocialPost = require('../../models/index').SocialPost;
 const Subscription = require('../../models/index').Subscription;
 
+const uploadHelpers = require('../../lib/helpers/settings');
+const uploadServer = uploadHelpers.uploadServer;
+
 /**
  * GET /media/recentComments
  * Recent comments
@@ -108,7 +111,8 @@ exports.recentReacts = async (req, res) => {
     numbersArray,
     highlightedNumber: page,
     previousNumber,
-    nextNumber
+    nextNumber,
+    uploadServer
   });
 
 };
@@ -151,7 +155,7 @@ exports.recentViews = async (req, res) => {
 
   views = _.filter(views, function(view){return view.upload.status !== 'processing'});
 
-  views = _.filter(views, function(view){return view.upload.uploadUrl });
+  // views = _.filter(views, function(view){return view.upload.uploadUrl });
 
 
   views = views.map(function (view) {
@@ -164,7 +168,8 @@ exports.recentViews = async (req, res) => {
     numbersArray,
     highlightedNumber: page,
     previousNumber,
-    nextNumber
+    nextNumber,
+    uploadServer
   });
 
 };

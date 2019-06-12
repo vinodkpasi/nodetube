@@ -178,13 +178,13 @@ block content
 
               div#myItem1.ldBar(data-preset="circle")
 
+              h4.seconds-remaining(style="margin-top:59px")
 
 
 
 
 
-
-  script(src='/js/lib/jquery-3.1.1.min.js')
+  // uploading via resumable
   script(src='/js/lib/resumable.js')
   script.
     $(document).ready(function () {
@@ -448,9 +448,24 @@ block content
 
             }
 
+            console.log(file.progress())
+
+            var amountDone = secondsSinceUploadStarted / file.progress();
+
+            console.log('seconds to complete: ' + amountDone)
+
+            var toDone = Number(amountDone) - Number(secondsSinceUploadStarted)
+
+            console.log('seconds remaining:' + toDone)
+
             console.log('running here ' + progress)
 
             console.log(secondsSinceUploadStarted);
+
+            if(toDone > 0.05){
+              $('.seconds-remaining').html('Completed in approximately ' + humanizeDuration(Math.round(toDone) * 1000));
+            }
+
 
             // TODO: add time left logic here
           }

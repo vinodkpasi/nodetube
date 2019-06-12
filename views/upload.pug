@@ -272,12 +272,14 @@ block content
           // replace underlines with spaces just to be nice
           var fileName = file.fileName.replace(/_/g, " ");
 
+          // TODO: what does this do?
           fileName = fileName.substring(0, fileName.lastIndexOf('.'));
 
           var title = $('#title').val();
 
           console.log(title);
 
+          // fill in title with file name if not uploaded yet
           if(!title || title == ""){
             $('#title').val(fileName);
           }
@@ -411,6 +413,20 @@ block content
           // Reflect that the file upload has resulted in error
           $('.file-progress').html('File could not be uploaded: (' + response.message + ')');
         });
+
+
+
+        var secondsSinceUploadStarted = 0;
+        var secondCounterStarted = false;
+
+        function startSecondCounter(){
+          setInterval(function(){
+            secondsSinceUploadStarted++
+          }, 1000)
+        }
+
+
+        /** ON PROGRESS **/
         r.on('fileProgress', function (file, response) {
 
           const progress = Math.floor(file.progress() * 100);
@@ -419,10 +435,24 @@ block content
 
             $('.file-progress').html('BEGINNING UPLOAD...');
           } else {
+            /** once file has started uploading **/
 
             $('.file-progress').html('PROGRESS: ' + progress + '%');
 
             bar1.set(progress);
+
+
+            if(!secondCounterStarted){
+              startSecondCounter();
+              secondCounterStarted = true;
+
+            }
+
+            console.log('running here ' + progress)
+
+            console.log(secondsSinceUploadStarted);
+
+            // TODO: add time left logic here
           }
 
 

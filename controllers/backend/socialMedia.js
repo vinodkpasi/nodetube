@@ -3,7 +3,6 @@ const oneOffSocialPost = require('../../lib/socialMedia/oneOffSocialPost');
 const Upload = require('../../models/index').Upload;
 const SocialPost = require('../../models/index').SocialPost;
 
-const gab = require('../../lib/socialMedia/gab');
 const twitter = require('../../lib/socialMedia/twitter');
 const facebook = require('../../lib/socialMedia/facebook');
 
